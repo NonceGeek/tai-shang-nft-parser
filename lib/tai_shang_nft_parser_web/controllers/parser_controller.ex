@@ -29,7 +29,7 @@ defmodule TaiShangNftParserWeb.ParserController do
     payload =
       @resp_success
       |> Map.put(:result, result)
-    json(conn, %{"result" => payload})
+    json(conn, payload)
   end
 
 end
