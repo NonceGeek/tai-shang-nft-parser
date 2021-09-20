@@ -1,7 +1,7 @@
 defmodule TaiShangNftParser.Parsers do
   alias TaiShangNftParser.NftHandler
 
-  @padding_str %{level_1: 37, level_2: 26}
+  @padding_str %{level_1: 29, level_2: 26}
 
 
   @doc """
