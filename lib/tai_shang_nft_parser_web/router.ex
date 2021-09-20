@@ -10,6 +10,11 @@ defmodule TaiShangNftParserWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :api_allow_cross do
+    plug CORSPlug, origin: [~r/.*/]
+    plug :accepts, ["json"]
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -21,7 +26,7 @@ defmodule TaiShangNftParserWeb.Router do
   end
 
   scope "/taishang/api/v1", TaiShangNftParserWeb do
-    pipe_through :api
+    pipe_through :api_allow_cross
 
     post "/parse", ParserController, :parse
   end

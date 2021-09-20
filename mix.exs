@@ -52,7 +52,10 @@ defmodule TaiShangNftParser.MixProject do
       {:ex_struct_translator, "~> 0.1.1"},
 
       {:poison, "~> 3.1"},
-      {:binary, "~> 0.0.5"}
+      {:binary, "~> 0.0.5"},
+
+      # cross domain
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
