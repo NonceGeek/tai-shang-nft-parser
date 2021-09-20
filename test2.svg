@@ -1,0 +1,10 @@
+<!-- <svg>
+<image xlink:href="/svg_resources/fish.svg" x="100" y="100" height="500" width="500" />
+</svg> -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100">
+<!-- <svg width="100%" height="100%" viewBox="0 0 100 100"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"> -->
+  <image xlink:href='svg_resources/hat.svg' x='1' y='1' height='50' width='50' />
+  <image xlink:href='svg_resources/fish.svg' x='1' y='1' height='50' width='50' />
+</svg>
