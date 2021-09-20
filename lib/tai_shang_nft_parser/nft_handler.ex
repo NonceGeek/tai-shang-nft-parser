@@ -38,9 +38,9 @@ defmodule TaiShangNftParser.NftHandler do
         img_source =
           collection
           |> Enum.at(value)
-          |> tap(fn _v ->
-            IO.puts inspect value
-          end)
+          # |> tap(fn _v ->
+          #   IO.puts inspect value
+          # end)
           |> ImgResources.get_by_unique_id()
           |> Map.get(:img_source)
 
