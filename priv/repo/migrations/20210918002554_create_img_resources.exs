@@ -10,6 +10,7 @@ defmodule TaiShangNftParser.Repo.Migrations.CreateImgResources do
       timestamps()
     end
 
-    create unique_index(:img_resources, [:name, :unique_id])
+    create unique_index(:img_resources, :unique_id)
+    create unique_index(:img_resources, :name)
   end
 end

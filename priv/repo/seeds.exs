@@ -17,27 +17,51 @@ alias TaiShangNftParser.{ImgResources, ParserTypes}
 svg_resources =
   [
     %{
-    name: "gun",
-    unique_id: 1,
-    description: "一把小手枪",
-    img_source: "svg_resources/handgun.svg"},
-    %{
-      name: "hat",
-      unique_id: 2,
-      description: "帽子",
-      img_source: "svg_resources/hat.svg"},
-    %{
-      name: "shoes",
-      unique_id: 3,
-      description: "鞋子",
-      img_source: "svg_resources/shoes.svg"},
-    %{
       name: "fish",
-      unique_id: 4,
+      unique_id: 10001,
       description: "鱼",
-      img_source: "svg_resources/fish.svg"},
-
-  ]
+      img_source: "svg_resources/bewater_flowing.gif"},
+    %{
+      name: "hat_white",
+      unique_id: 20001,
+      description: "帽子",
+      img_source: "svg_resources/hat_white.svg"},
+    %{
+      name: "hat_yellow",
+      unique_id: 20002,
+      description: "帽子",
+      img_source: "svg_resources/hat_yellow.svg"},
+    %{
+      name: "hat_pink",
+      unique_id: 20003,
+      description: "帽子",
+      img_source: "svg_resources/hat_pink.svg"},
+    %{
+      name: "shoes_orange",
+      unique_id: 30001,
+      description: "鞋子",
+      img_source: "svg_resources/shoes_orange.svg"},
+    %{
+      name: "shoes_blue",
+      unique_id: 30002,
+      description: "鞋子",
+      img_source: "svg_resources/shoes_blue.svg"},
+    %{
+      name: "shoes_pink",
+      unique_id: 30003,
+      description: "鞋子",
+      img_source: "svg_resources/shoes_pink.svg"},
+    %{
+      name: "slogan",
+      unique_id: 40001,
+      description: "标语",
+      img_source: "svg_resources/slogan.svg"},
+    %{
+      name: "hand_zan",
+      unique_id: 50001,
+      description: "点赞",
+      img_source: "svg_resources/hand_zan.svg"},
+]
 
 Enum.each(svg_resources, fn svg ->
   ImgResources.create(svg)
@@ -49,15 +73,15 @@ parser_type =
     unique_id: 1,
     resources:
       %{
-        background: %{collection: [4], x: 1, y: 1, height: 500, width: 500},
-        first: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5 , height: 100, width: 100},
-        second: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5, height: 100, width: 100},
-        third: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5, height: 100, width: 100},
-        fourth: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5, height: 100, width: 100},
-        fifth: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5, height: 100, width: 100},
-        sixth: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5, height: 100, width: 100},
-        seventh: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5, height: 100, width: 100},
-        eighth: %{collection: [1,2,3,1,2,3,1,2,3,1,2,3], x: 5, y: 5, height: 100, width: 100},
+        background: %{collection: [10001], x: 0, y: 0, height: 400, width: 400},
+        first: %{collection: [20001,20001,20001,20001,20002,20002,20002,20002,20003,20003,20003,0], x: 230, y: 80 , height: 100, width: 100}, # hat
+        second: %{collection: [30001,30001,30001,30001,30002,30002,30002,30002,30003,30003,30003, 0], x: 170, y: 260, height: 100, width: 100}, # shoes
+        third: %{collection: [50001,50001,50001,50001,50001,50001,50001,50001,50001,50001,50001,50001], x: 200, y: 150, height: 100, width: 100}, # hand
+        fourth: %{collection: [40001,40001,40001,40001,40001,40001,40001,40001,40001,40001,40001, 40001], x: 150, y: 0, height: 100, width: 150}, #slogan
+        fifth: %{collection: [], x: 5, y: 5, height: 100, width: 100},
+        sixth: %{collection: [], x: 5, y: 5, height: 100, width: 100},
+        seventh: %{collection: [], x: 5, y: 5, height: 100, width: 100},
+        eighth: %{collection: [], x: 5, y: 5, height: 100, width: 100},
       }
   }
 

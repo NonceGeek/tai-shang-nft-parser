@@ -14,6 +14,7 @@ defmodule TaiShangNftParser.NftHandler do
     n: [:first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eighth]
   }
 
+  def build_img_payload(nil, _x, _y, _height, _width), do: nil
   def build_img_payload(img_source, x, y, height, width) do
     "<image xlink:href='#{img_source}' "
     |> Kernel.<>("x='#{x}' y='#{y}' ")
@@ -41,8 +42,8 @@ defmodule TaiShangNftParser.NftHandler do
           # |> tap(fn _v ->
           #   IO.puts inspect value
           # end)
-          |> ImgResources.get_by_unique_id()
-          |> Map.get(:img_source)
+          |> handle_img_resource()
+
 
         svg_acc <> build_img_payload(img_source, x, y, height, width)
       end)
@@ -52,6 +53,13 @@ defmodule TaiShangNftParser.NftHandler do
     |> replace_header()
   end
 
+  def handle_img_resource(unique_id) when is_nil(unique_id) or (unique_id == 0), do: ""
+
+  def handle_img_resource(unique_id) do
+    unique_id
+    |> ImgResources.get_by_unique_id()
+    |> Map.get(:img_source)
+  end
   def replace_header(img) do
     String.replace(img, @header.origin, @header.replace)
   end
