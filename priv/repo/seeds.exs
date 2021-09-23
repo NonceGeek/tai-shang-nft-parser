@@ -61,6 +61,16 @@ svg_resources =
       unique_id: 50001,
       description: "点赞",
       img_source: "svg_resources/hand_zan.svg"},
+    %{
+      name: "hand_gun",
+      unique_id: 50002,
+      description: "手指手枪",
+      img_source: "svg_resources/hand_gun.svg"},
+    %{
+      name: "hand_gun",
+      unique_id: 50003,
+      description: "手枪",
+      img_source: "svg_resources/hand_gun_2.svg"},
 ]
 
 Enum.each(svg_resources, fn svg ->
@@ -76,7 +86,7 @@ parser_type =
         background: %{collection: [10001], x: 0, y: 0, height: 400, width: 400},
         first: %{collection: [20001,20001,20001,20001,20002,20002,20002,20002,20003,20003,20003,0], x: 230, y: 80 , height: 100, width: 100}, # hat
         second: %{collection: [30001,30001,30001,30001,30002,30002,30002,30002,30003,30003,30003, 0], x: 170, y: 260, height: 100, width: 100}, # shoes
-        third: %{collection: [50001,50001,50001,50001,50001,50001,50001,50001,50001,50001,50001,50001], x: 200, y: 150, height: 100, width: 100}, # hand
+        third: %{collection: [50001,50001,50001,50001,50002,50002,50002,50002,50003,50003,50003, 0], x: 200, y: 150, height: 100, width: 100}, # hand
         fourth: %{collection: [40001,40001,40001,40001,40001,40001,40001,40001,40001,40001,40001, 40001], x: 150, y: 0, height: 100, width: 150}, #slogan
         fifth: %{collection: [], x: 5, y: 5, height: 100, width: 100},
         sixth: %{collection: [], x: 5, y: 5, height: 100, width: 100},
