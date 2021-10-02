@@ -6,13 +6,13 @@ defmodule TaiShangNftParser.Parsers do
   @doc """
     the enter of parser controller.
   """
-  def parse_handle_rebuild_nft(handler_id, nft_type, payload_raw) do
+  def parse_handle_rebuild_nft(handler_id, nft_type, payload_raw, base_url) do
     %{payload: payload, img_parsed: img_parsed}
       = parse_nft(nft_type, payload_raw)
 
     rebuild_nft(
       payload,
-      NftHandler.handle_svg(img_parsed, handler_id, nft_type)
+      NftHandler.handle_svg(img_parsed, handler_id, nft_type, base_url)
     )
   end
   def parse_nft(:n, payload_raw) do

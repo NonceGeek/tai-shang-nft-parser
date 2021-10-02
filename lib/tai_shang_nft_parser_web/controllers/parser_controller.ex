@@ -14,7 +14,14 @@ defmodule TaiShangNftParserWeb.ParserController do
   #   result: ""
   # }
 
-  def parse(conn, %{"handler_id" => id, "type" => type, "token_uri" => payload}) do
+  def parse(
+    conn,
+    %{
+      "handler_id" => id,
+      "type" => type,
+      "token_uri" => payload,
+      "base_url" => base_url
+    }) do
 
     payload_atom_struct =
       ExStructTranslator.to_atom_struct(payload)
@@ -24,7 +31,9 @@ defmodule TaiShangNftParserWeb.ParserController do
       Parsers.parse_handle_rebuild_nft(
         handler_id_int,
         type_atom,
-        payload_atom_struct)
+        payload_atom_struct,
+        base_url
+        )
 
     payload =
       @resp_success

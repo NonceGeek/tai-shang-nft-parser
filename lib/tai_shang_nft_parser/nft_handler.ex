@@ -1,6 +1,7 @@
 defmodule TaiShangNftParser.NftHandler do
 
   alias TaiShangNftParser.{ParserTypes, ImgResources}
+  alias Utils.StringHandler
   @traits %{
     n: "<text"
     }
@@ -21,8 +22,8 @@ defmodule TaiShangNftParser.NftHandler do
     |> Kernel.<>("height='#{height}' width='#{width}' />")
   end
 
-  @spec handle_svg(binary, any, :n) :: binary
-  def handle_svg(img_parsed, parser_type_id, :n) do
+  @spec handle_svg(binary, any, :n, String.t()) :: binary
+  def handle_svg(img_parsed, parser_type_id, :n, base_url) do
 
     %{resources: resources} = ParserTypes.get_by_unique_id(parser_type_id)
 
@@ -42,7 +43,7 @@ defmodule TaiShangNftParser.NftHandler do
           # |> tap(fn _v ->
           #   IO.puts inspect value
           # end)
-          |> handle_img_resource()
+          |> handle_img_resource(base_url)
 
 
         svg_acc <> build_img_payload(img_source, x, y, height, width)
@@ -53,13 +54,19 @@ defmodule TaiShangNftParser.NftHandler do
     |> replace_header()
   end
 
-  def handle_img_resource(unique_id) when is_nil(unique_id) or (unique_id == 0), do: ""
+  def handle_img_resource(unique_id, _base_url) when is_nil(unique_id) or (unique_id == 0), do: ""
 
-  def handle_img_resource(unique_id) do
-    unique_id
-    |> ImgResources.get_by_unique_id()
-    |> Map.get(:img_source)
+  def handle_img_resource(unique_id, base_url) do
+    img_source =
+      unique_id
+      |> ImgResources.get_by_unique_id()
+      |> Map.get(:img_source)
+
+    base_url
+    |> StringHandler.handle_url()
+    |> Kernel.<>(img_source)
   end
+
   def replace_header(img) do
     String.replace(img, @header.origin, @header.replace)
   end
