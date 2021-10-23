@@ -6,25 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "TaiShangNftParser", suffix: " · Phoenix Framework" %>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/bootstrap.min.css") %>"/>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/bootstrap.bundle.min.js") %>"></script>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/application.css") %>"/>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <style>
+      @font-face {
+        font-family: "Blox";
+        src: url(<%= Routes.static_path(@conn, "/css/Blox.ttf") %>);
+      }
+      #slogan {
+        font-family: 'Blox';
+      }
+    </style>
   </head>
   <body>
     <header>
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+            <li><a href="https://hexdocs.pm/phoenix/overview.html">注册</a></li>
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+              <li><%= link "登录", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <% end %>
           </ul>
         </nav>
         <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
+          <div id="slogan"><h1>TaiShang NFT SUper Parser</h1></div>
         </a>
       </section>
     </header>
+
+    <div id="the_nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">组件广场</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/live/service_lottery">渲染规则管理</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/live/app">效果预览</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/live/event">资源上链</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </div>
     <%= @inner_content %>
   </body>
 </html>

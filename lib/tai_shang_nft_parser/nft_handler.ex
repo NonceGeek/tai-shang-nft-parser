@@ -57,6 +57,7 @@ defmodule TaiShangNftParser.NftHandler do
   def handle_img_resource(unique_id, _base_url) when is_nil(unique_id) or (unique_id == 0), do: ""
 
   def handle_img_resource(unique_id, base_url) do
+    IO.puts inspect unique_id
     img_source =
       unique_id
       |> ImgResources.get_by_unique_id()

@@ -62,7 +62,7 @@ svg_resources =
       description: "点赞",
       img_source: "svg_resources/hand_zan.svg"},
     %{
-      name: "hand_gun",
+      name: "hand_finger_gun",
       unique_id: 50002,
       description: "手指手枪",
       img_source: "svg_resources/hand_gun.svg"},

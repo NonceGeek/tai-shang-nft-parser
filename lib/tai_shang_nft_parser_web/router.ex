@@ -22,7 +22,7 @@ defmodule TaiShangNftParserWeb.Router do
   scope "/", TaiShangNftParserWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", IndexLive, :index
   end
 
   scope "/taishang/api/v1", TaiShangNftParserWeb do
