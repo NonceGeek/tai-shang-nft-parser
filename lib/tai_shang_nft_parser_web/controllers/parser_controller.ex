@@ -26,11 +26,10 @@ defmodule TaiShangNftParserWeb.ParserController do
     payload_atom_struct =
       ExStructTranslator.to_atom_struct(payload)
     handler_id_int = String.to_integer(id)
-    type_atom = String.to_atom(type)
     result =
       Parsers.parse_handle_rebuild_nft(
         handler_id_int,
-        type_atom,
+        type,
         payload_atom_struct,
         base_url
         )

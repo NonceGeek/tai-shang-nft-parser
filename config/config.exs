@@ -10,6 +10,12 @@ use Mix.Config
 config :tai_shang_nft_parser,
   ecto_repos: [TaiShangNftParser.Repo]
 
+# for user
+config :tai_shang_nft_parser, :pow,
+  user: TaiShangNftParser.Users.User,
+  repo: TaiShangNftParser.Repo,
+  controller_callbacks: MyCustomExtension.ControllerCallbacks
+
 # Configures the endpoint
 config :tai_shang_nft_parser, TaiShangNftParserWeb.Endpoint,
   url: [host: "localhost"],

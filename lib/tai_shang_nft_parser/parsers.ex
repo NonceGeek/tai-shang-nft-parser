@@ -15,7 +15,7 @@ defmodule TaiShangNftParser.Parsers do
       NftHandler.handle_svg(img_parsed, handler_id, nft_type, base_url)
     )
   end
-  def parse_nft(:n, payload_raw) do
+  def parse_nft(nft_type, payload_raw) do
     %{image: img_raw}
     = payload
     = payload_raw

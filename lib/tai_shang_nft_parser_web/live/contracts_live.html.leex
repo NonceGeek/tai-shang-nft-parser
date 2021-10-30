@@ -1,0 +1,16 @@
+<%= for contract <- @contracts do %>
+    <center>
+
+    <br>
+    <b>合约名称: </b><%= contract.name %>
+    <br>
+    <b>合约描述: </b><%= contract.description %>
+    <br>
+    <b>合约类型: </b><%= contract.contract_types.name %>
+    <br>
+    <b>查看源码: </b>
+    <a href="<%= contract.code_url %>" target="_blank">
+        <%= contract.code_url %>
+    </a>
+    </center>
+<% end %>

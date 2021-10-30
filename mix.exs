@@ -55,7 +55,12 @@ defmodule TaiShangNftParser.MixProject do
       {:binary, "~> 0.0.5"},
 
       # cross domain
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+
+      # # for user
+      # {:comeonin, "~> 4.0"},
+      # {:bcrypt_elixir, "~> 1.0"},
+      {:pow, "~> 1.0.25"}
     ]
   end
 

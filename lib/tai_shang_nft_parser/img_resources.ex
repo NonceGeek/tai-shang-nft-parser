@@ -1,6 +1,7 @@
 defmodule TaiShangNftParser.ImgResources do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query, warn: false
   alias TaiShangNftParser.Repo
   alias  TaiShangNftParser.ImgResources,as: Ele
 
@@ -10,6 +11,14 @@ defmodule TaiShangNftParser.ImgResources do
     field :description, :string
     field :img_source, :string
     timestamps()
+  end
+
+  def list(current_page, per_page) do
+    Repo.all(
+      from e in Ele,
+        offset: ^((current_page - 1) * per_page),
+        limit: ^per_page
+    )
   end
 
   def get_by_id(nil), do: nil

@@ -11,6 +11,8 @@
 # and so on) as they will fail if something goes wrong.
 
 alias TaiShangNftParser.{ImgResources, ParserTypes}
+alias TaiShangNftParser.Users.User
+alias TaiShangNftParser.{Contracts, ContractTypes, ParserRules}
 
 # init svg_resources
 
@@ -96,3 +98,47 @@ parser_type =
   }
 
 ParserTypes.create(parser_type)
+
+{:ok, %{id: id}} = ContractTypes.create(
+  %{
+    name: "n",
+    description: "n 合约类型",
+    handler: "NHandler",
+  }
+)
+
+Contracts.create(
+  %{
+    name: "basic N",
+    description: "基础款 N 合约",
+    contract_types_id: id,
+    code_url: "https://github.com/WeLightProject/tai-shang-nft-contracts/tree/feat/basic_n"
+  })
+
+Contracts.create(
+  %{
+    name: "N with whitelist",
+    description: "有白名单机制的 N 合约",
+    contract_types_id: id,
+    code_url: "https://github.com/WeLightProject/tai-shang-nft-contracts/tree/feat/whitelist_n"
+  })
+
+ParserRules.create(
+  %{
+    unique_id: 1,
+    description: "bewater",
+    object_to_resource:
+    %{
+      background: [10001],
+      first: [20001,20001,20001,20001,20002,20002,20002,20002,20003,20003,20003,0],
+      second: [30001,30001,30001,30001,30002,30002,30002,30002,30003,30003,30003, 0],
+      third: [50001,50001,50001,50001,50002,50002,50002,50002,50003,50003,50003, 0],
+      fourth: [40001,40001,40001,40001,40001,40001,40001,40001,40001,40001,40001, 40001]
+
+    },
+    contract_types_id: id,
+  })
+
+# !important: for Test!Ano it when using in production env
+User.create("leeduckgo@l.com", "1234567890", "admin")
+User.create("leeduckgo2@l.com", "1234567890")

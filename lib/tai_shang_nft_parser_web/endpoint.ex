@@ -52,5 +52,7 @@ defmodule TaiShangNftParserWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  # for user
+  plug Pow.Plug.Session, otp_app: :tai_shang_nft_parser
   plug TaiShangNftParserWeb.Router
 end
