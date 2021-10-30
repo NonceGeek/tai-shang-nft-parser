@@ -1,5 +1,7 @@
 defmodule TaiShangNftParser.NftHandler do
   alias TaiShangNftParser.ContractTypes
+  alias TaiShangNftParser.ImgResources
+  alias Utils.StringHandler
 
   def handle_svg(img_parsed, parser_id, contract_type_name, base_url) do
     %{handler: handler} =
