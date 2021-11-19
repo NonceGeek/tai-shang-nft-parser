@@ -26,9 +26,9 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">注册</a></li>
+            <li><a href="https://hexdocs.pm/phoenix/overview.html">Register</a></li>
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "登录", to: Routes.live_dashboard_path(@conn, :home) %></li>
+              <li><%= link "Login", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <% end %>
           </ul>
         </nav>
@@ -44,21 +44,21 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="/">组件广场</a>
+              <a class="nav-link active" href="/">Compoenent Playground</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/live/contracts">合约广场</a>
+              <a class="nav-link active" href="/live/contracts">Contract Playground</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/live/parser_rules">渲染规则</a>
+              <a class="nav-link active" href="/live/parser_rules">Render Rules</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active">效果预览(TODO)</a>
+              <a class="nav-link active">Preview(TODO)</a>
               <!--<a class="nav-link active" href="/live/preview">效果预览</a>-->
             </li>
             <li class="nav-item">
               <!--<a class="nav-link active" href="/live/to_chain">资源上链</a>-->
-               <a class="nav-link active">资源上链(TODO)</a>
+               <a class="nav-link active">Resources to Chain(TODO)</a>
             </li>
           </ul>
         </div>

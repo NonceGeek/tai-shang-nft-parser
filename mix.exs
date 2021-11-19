@@ -47,6 +47,7 @@ defmodule TaiShangNftParser.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:plug_crypto, "~> 1.2.2"},
 
       # Utils
       {:ex_struct_translator, "~> 0.1.1"},

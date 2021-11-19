@@ -1,15 +1,15 @@
 <%= for rule <- @rules do %>
     <br>
-    <b>规则唯一 id: </b><%= rule.unique_id %>
+    <b>Rule ID: </b><%= rule.unique_id %>
     <br>
-    <b>规则描述: </b><%= rule.description %>
+    <b>Rule Description: </b><%= rule.description %>
     <br>
-    <b>规则所述 NFT 类型: </b><%= rule.contract_types.name %>
+    <b>The NFT Type of the Rule: </b><%= rule.contract_types.name %>
     <br>
-    <b>解析接口地址:</b><br>
+    <b>The Render API:</b><br>
     /taishang/api/v1/parse?handler_id=<%= rule.unique_id %>&type=<%= rule.contract_types.name %>
     <br>
-    <b>映射方式:</b>
+    <b>The Way to Render:</b>
 
     <br>
        <%= for {key, item_lists} <- rule.object_to_resource do %>
