@@ -21,57 +21,57 @@ svg_resources =
     %{
       name: "fish",
       unique_id: 10001,
-      description: "鱼",
+      description: "fish",
       img_source: "svg_resources/bewater_flowing.gif"},
     %{
       name: "hat_white",
       unique_id: 20001,
-      description: "帽子",
+      description: "white hat",
       img_source: "svg_resources/hat_white.svg"},
     %{
       name: "hat_yellow",
       unique_id: 20002,
-      description: "帽子",
+      description: "yellow hat",
       img_source: "svg_resources/hat_yellow.svg"},
     %{
       name: "hat_pink",
       unique_id: 20003,
-      description: "帽子",
+      description: "pink hat",
       img_source: "svg_resources/hat_pink.svg"},
     %{
       name: "shoes_orange",
       unique_id: 30001,
-      description: "鞋子",
+      description: "orange shoes",
       img_source: "svg_resources/shoes_orange.svg"},
     %{
       name: "shoes_blue",
       unique_id: 30002,
-      description: "鞋子",
+      description: "blue shoes",
       img_source: "svg_resources/shoes_blue.svg"},
     %{
       name: "shoes_pink",
       unique_id: 30003,
-      description: "鞋子",
+      description: "pink shoes",
       img_source: "svg_resources/shoes_pink.svg"},
     %{
       name: "slogan",
       unique_id: 40001,
-      description: "标语",
+      description: "slogan",
       img_source: "svg_resources/slogan.svg"},
     %{
-      name: "hand_zan",
+      name: "thumb",
       unique_id: 50001,
-      description: "点赞",
+      description: "thumb up",
       img_source: "svg_resources/hand_zan.svg"},
     %{
       name: "hand_finger_gun",
       unique_id: 50002,
-      description: "手指手枪",
+      description: "hand finger gun",
       img_source: "svg_resources/hand_gun.svg"},
     %{
       name: "hand_gun",
       unique_id: 50003,
-      description: "手枪",
+      description: "gun",
       img_source: "svg_resources/hand_gun_2.svg"},
 ]
 
@@ -98,19 +98,21 @@ parser_type =
   }
 
 ParserTypes.create(parser_type)
-
+example_svg =
+  Utils.FileHandler.read(:bin, "example_nft.uri")
 {:ok, %{id: id}} = ContractTypes.create(
   %{
     name: "n",
-    description: "n 合约类型",
+    description: "the n project",
     handler: "NHandler",
+    example_svg: example_svg
   }
 )
 
 Contracts.create(
   %{
     name: "basic N",
-    description: "基础款 N 合约",
+    description: "basic N",
     contract_types_id: id,
     code_url: "https://github.com/WeLightProject/tai-shang-nft-contracts/tree/feat/basic_n"
   })
@@ -118,7 +120,7 @@ Contracts.create(
 Contracts.create(
   %{
     name: "N with whitelist",
-    description: "有白名单机制的 N 合约",
+    description: "N with whitelist",
     contract_types_id: id,
     code_url: "https://github.com/WeLightProject/tai-shang-nft-contracts/tree/feat/whitelist_n"
   })

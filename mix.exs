@@ -61,7 +61,13 @@ defmodule TaiShangNftParser.MixProject do
       # # for user
       # {:comeonin, "~> 4.0"},
       # {:bcrypt_elixir, "~> 1.0"},
-      {:pow, "~> 1.0.25"}
+      {:pow, "~> 1.0.25"},
+
+      # arweave
+      {:arweave_sdk_ex, "~> 0.1.1"},
+
+      # handle_uri
+      {:ex_url, "~> 1.4"},
     ]
   end
 

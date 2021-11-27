@@ -2,13 +2,20 @@ defmodule TaiShangNftParser.ContractTypes do
   use Ecto.Schema
   import Ecto.Changeset
   alias TaiShangNftParser.Repo
+  alias TaiShangNftParser.Contracts
   alias TaiShangNftParser.ContractTypes, as: Ele
 
   schema "contract_types" do
     field :name, :string
     field :description, :string
     field :handler, :string
+    field :example_svg, :string
+    has_many :contracts, Contracts
     timestamps()
+  end
+
+  def preload(ele) do
+    Repo.preload(ele, :contracts)
   end
 
   def get_all() do
@@ -39,6 +46,11 @@ defmodule TaiShangNftParser.ContractTypes do
   @doc false
   def changeset(%Ele{} = ele, attrs) do
     ele
-    |> cast(attrs, [:name, :description, :handler])
+    |> cast(attrs, [
+      :name,
+      :description,
+      :handler,
+      :example_svg
+      ])
   end
 end

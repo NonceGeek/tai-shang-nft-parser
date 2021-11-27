@@ -10,6 +10,7 @@ defmodule TaiShangNftParser.ImgResources do
     field :unique_id, :integer
     field :description, :string
     field :img_source, :string
+    field :arweave_tx_id, :string
     timestamps()
   end
 
@@ -65,7 +66,7 @@ defmodule TaiShangNftParser.ImgResources do
   @doc false
   def changeset(%Ele{} = app, attrs) do
     app
-    |> cast(attrs, [:name, :description, :img_source, :unique_id])
+    |> cast(attrs, [:name, :description, :img_source, :unique_id, :arweave_tx_id])
     |> unique_constraint(:name)
     |> unique_constraint(:unique_id)
   end

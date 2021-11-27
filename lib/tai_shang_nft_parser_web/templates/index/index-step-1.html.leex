@@ -1,0 +1,28 @@
+<center>
+    <br>
+    <h3>Step by Step to Create A Renderer for ur Abstract NFT!<h3>
+    <b>Select The NFT Type of ur DApp:</b>
+    <br><br>
+    <%= f = form_for @form, "#", [phx_change: :step_1_change, phx_submit: :step_1_submit] , fn f ->%>
+        <%= select f, :contract_type_name_selected, @contract_type_names, value: @contract_type_name_selected %>
+
+    <h3>Contracts belong to this type:
+        <%= for contract <- @contracts do %>
+            <br>
+            <b>id: </b><%= contract.id %>
+            <br>
+            <b>description: </b><%= contract.description %>
+            <br>
+            <b>Source Code: </b>
+            <a href="<%= contract.code_url %>" target="_blank">
+                <%= contract.code_url %>
+            </a>
+        <% end %>
+    <h3> - Step 0x01 - </h3>
+    <div>
+        <%= submit "Next Step"%>
+
+    </div>
+    <% end %>
+</center>
+</div>

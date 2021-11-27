@@ -2,12 +2,14 @@ defmodule TaiShangNftParser.ParserTypes do
   use Ecto.Schema
   import Ecto.Changeset
   alias TaiShangNftParser.Repo
-  alias  TaiShangNftParser.ParserTypes,as: Ele
+  alias TaiShangNftParser.ParserTypes,as: Ele
+  alias TaiShangNftParser.ContractTypes
 
   schema "parser_types" do
     field :name, :string
     field :unique_id, :integer
     field :resources, :map
+    belongs_to :contract_types, ContractTypes
     timestamps()
   end
 
@@ -56,7 +58,7 @@ defmodule TaiShangNftParser.ParserTypes do
   @doc false
   def changeset(%Ele{} = app, attrs) do
     app
-    |> cast(attrs, [:name, :unique_id, :resources])
+    |> cast(attrs, [:name, :unique_id, :resources, :contract_types_id])
     |> unique_constraint(:unique_id)
   end
 end
