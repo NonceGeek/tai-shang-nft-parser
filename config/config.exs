@@ -19,12 +19,13 @@ config :tai_shang_nft_parser, :pow,
 # Configures the endpoint
 config :tai_shang_nft_parser, TaiShangNftParserWeb.Endpoint,
   # !IMPORTANT: Change it to ur domain here.
-  url: [host: "https://taishang.leeduckgo.com"],
+  url: [host: "localhost"],
   secret_key_base: "gEK+FDQ1h9Xz3N0azzPcWbSVM90ztwzKTL/1zemY/0XfxgwymPdasKOR9QpT/NMA",
   render_errors: [view: TaiShangNftParserWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TaiShangNftParser.PubSub,
   live_view: [signing_salt: "w6b58jwy"],
-  arweave: "https://arweave.net"
+  arweave: "https://arweave.net",
+  url_actually: "https://taishang.leeduckgo.com"
 
 
 # Configures Elixir's Logger

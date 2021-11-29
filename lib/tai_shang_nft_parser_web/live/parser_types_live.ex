@@ -2,7 +2,7 @@ defmodule TaiShangNftParserWeb.ParserTypesLive do
   use TaiShangNftParserWeb, :live_view
   alias TaiShangNftParser.ParserTypes
 
-  @domain  Application.get_env(:tai_shang_nft_parser, TaiShangNftParserWeb.Endpoint)[:url][:host]
+  @domain  Application.get_env(:tai_shang_nft_parser, TaiShangNftParserWeb.Endpoint)[:url_actually]
   @example_payload %{
     "token_uri" => "data:application/json;base64,eyJuYW1lIjogIk4gIzIzMyIsICJkZXNjcmlwdGlvbiI6ICJOIGlzIGp1c3QgbnVtYmVycy4iLCAiaW1hZ2UiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhCeVpYTmxjblpsUVhOd1pXTjBVbUYwYVc4OUluaE5hVzVaVFdsdUlHMWxaWFFpSUhacFpYZENiM2c5SWpBZ01DQXpOVEFnTXpVd0lqNDhjM1I1YkdVK0xtSmhjMlVnZXlCbWFXeHNPaUIzYUdsMFpUc2dabTl1ZEMxbVlXMXBiSGs2SUhObGNtbG1PeUJtYjI1MExYTnBlbVU2SURFMGNIZzdJSDA4TDNOMGVXeGxQanh5WldOMElIZHBaSFJvUFNJeE1EQWxJaUJvWldsbmFIUTlJakV3TUNVaUlHWnBiR3c5SW1Kc1lXTnJJaUF2UGp4MFpYaDBJSGc5SWpFd0lpQjVQU0l5TUNJZ1kyeGhjM005SW1KaGMyVWlQakV3UEM5MFpYaDBQangwWlhoMElIZzlJakV3SWlCNVBTSTBNQ0lnWTJ4aGMzTTlJbUpoYzJVaVBqazhMM1JsZUhRK1BIUmxlSFFnZUQwaU1UQWlJSGs5SWpZd0lpQmpiR0Z6Y3owaVltRnpaU0krTlR3dmRHVjRkRDQ4ZEdWNGRDQjRQU0l4TUNJZ2VUMGlPREFpSUdOc1lYTnpQU0ppWVhObElqNDJQQzkwWlhoMFBqeDBaWGgwSUhnOUlqRXdJaUI1UFNJeE1EQWlJR05zWVhOelBTSmlZWE5sSWo0MFBDOTBaWGgwUGp4MFpYaDBJSGc5SWpFd0lpQjVQU0l4TWpBaUlHTnNZWE56UFNKaVlYTmxJajR4TVR3dmRHVjRkRDQ4ZEdWNGRDQjRQU0l4TUNJZ2VUMGlNVFF3SWlCamJHRnpjejBpWW1GelpTSStNand2ZEdWNGRENDhkR1Y0ZENCNFBTSXhNQ0lnZVQwaU1UWXdJaUJqYkdGemN6MGlZbUZ6WlNJK01UQThMM1JsZUhRK1BDOXpkbWMrIn0=",
     "base_url" => "https://bewater.leeduckgo.com"
@@ -34,7 +34,30 @@ defmodule TaiShangNftParserWeb.ParserTypesLive do
       :ok,
       socket
       |> assign(parsers: parsers_handled)
+      |> assign(form: :payloads)
     }
+  end
+
+  @doc """
+    set coupon hash to socket when clicked btn.
+  """
+  @impl true
+  def handle_event("change",
+    %{
+      "_target" => ["coupon"],
+      "coupon" => coupon_hash
+      }, socket) do
+
+    {:noreply,
+      socket
+      |> assign(coupon: coupon_hash)
+    }
+  end
+
+  @impl true
+  def handle_event("upload_rules",params, socket) do
+    IO.puts inspect params
+    {:noreply, socket}
   end
 
   @impl true
@@ -52,4 +75,7 @@ defmodule TaiShangNftParserWeb.ParserTypesLive do
     |> Kernel.<>("&resources_on=arweave")
   end
 
+  def generate_api_doc() do
+
+  end
 end

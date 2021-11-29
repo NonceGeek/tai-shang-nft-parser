@@ -7,13 +7,19 @@ defmodule TaiShangNftParser.NftHandler.NHandler do
   @behaviour HandlerBehaviour # necessary for behaviour
 
   @traits %{
-    n: "<text"
+    n: "<text",
+    img: "<image"
     }
 
   @header %{
     origin: "<svg xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMinYMin meet\" viewBox=\"0 0 350 350\">",
-    replace: "<svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" preserveAspectRatio=\"xMinYMin meet\" viewBox=\"0 0 350 350\">"
+    replace: "
+      <svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" preserveAspectRatio=\"xMinYMin meet\" viewBox=\"0 0 350 350\">
+    "
   }
+
+  @rect "<rect x=\"30\" width=\"320\" height=\"350\" style=\"fill:rgb(255,255,255);\" />"
+
 
   @keys %{
     n: [:first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eighth]
@@ -79,12 +85,19 @@ defmodule TaiShangNftParser.NftHandler.NHandler do
       img_parsed
       |> NftHandler.insert_payload_to_svg(@traits.n, payload_svg)
       |> replace_header()
+      |> insert_white_rect()
 
     result
   end
 
   def replace_header(img) do
     String.replace(img, @header.origin, @header.replace)
+  end
+
+  def insert_white_rect(img) do
+    {pos, _} = :binary.match(img, @traits.img)
+    {bef, aft} = String.split_at(img, pos)
+    bef <> @rect <> aft
   end
 
   def insert_background(abstract_nft, %{background: _background}) do

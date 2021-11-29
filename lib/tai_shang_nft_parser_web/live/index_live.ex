@@ -12,10 +12,38 @@ defmodule TaiShangNftParserWeb.IndexLive do
     "fourth", "fifth", "sixth",
     "seventh", "eighth"
   ]
+
+  @default_collection %{
+    second_collection:
+    Poison.encode!(
+    List.duplicate("house_yellow", 4)
+    |> Kernel.++ List.duplicate("house_red", 4)
+    |> Kernel.++ List.duplicate("house_green", 4)
+    |> Kernel.++ List.duplicate("house_black", 2)
+    ),
+    third_collection:
+    Poison.encode!(
+      List.duplicate("sky_moon", 4)
+      |> Kernel.++ List.duplicate("sky_sun", 4)
+      |> Kernel.++ List.duplicate("sky_cloud", 4)
+      ),
+    fourth_collection:
+    Poison.encode!(
+      List.duplicate("slogan_amazing", 4)
+      |> Kernel.++ List.duplicate("slogan_wow", 4)
+      |> Kernel.++ List.duplicate("slogan_cool_guy", 4)
+      ),
+    first_collection:
+    Poison.encode!(
+      List.duplicate("ground_soil", 4)
+      |> Kernel.++ List.duplicate("ground_sea", 4)
+      |> Kernel.++ List.duplicate("ground_grass", 4)
+      )
+  }
   @init_value "1"
 
   @page_first "1"
-  @default_page_size "3"
+  @default_page_size "15"
 
   @impl true
   def render(assigns) do
@@ -34,25 +62,33 @@ defmodule TaiShangNftParserWeb.IndexLive do
       encoded_carts
       |> Base.url_decode64!()
       |> Poison.decode!()
-    resources =
+    resources_in_cart =
       Enum.map(cart_ids, fn img_id ->
         ImgResources.get_by_id(img_id)
       end)
     resource_selected =
-      Enum.fetch!(resources, 0)
+      Enum.fetch!(resources_in_cart, 0)
+
+    payloads =
+      init_collections()
+      |> Map.merge(init_params())
     {
       :ok,
       socket
       |> assign(step: 3)
       |> assign(form: :payloads)
-      |> assign(resources: resources)
+      |> assign(resources_in_cart: resources_in_cart)
       |> assign(resource_selected: resource_selected)
       |> assign(contract_type_name: contract_type_name)
-      |> assign(payloads: init_payloads())
+      |> assign(payloads: payloads)
     }
   end
 
-  def init_payloads() do
+  def init_collections() do
+    @default_collection
+  end
+
+  def init_params() do
     @inputs_listen_change
     |> Enum.map(&String.to_atom(&1))
     |> Enum.reduce(%{}, fn key, acc ->
@@ -327,6 +363,15 @@ defmodule TaiShangNftParserWeb.IndexLive do
     end)
     |> Enum.into(%{})
   end
+
+  def do_generate_collection(:background_collection, name)
+    when name == "" or is_nil(name) do
+    {
+      :background,
+      %{collection: [], height: 385, width: 380, x: 0, y: 0}
+    }
+  end
+
   def do_generate_collection(:background_collection, name) do
     resource =
       name

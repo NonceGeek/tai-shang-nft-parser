@@ -1,5 +1,5 @@
 <br><br>
-
+<%= f = form_for @form, "#", [phx_change: :change] , fn f ->%>
 <div style="width:70%;margin:auto;">
 <center><h2>API Document</h2></center>
  <%= raw(Earmark.as_html!("
@@ -34,7 +34,7 @@
 ```
 
 **see code example in dApp:**
- >abcdefg
+ > [App.jsx](https://github.com/WeLightProject/Tai-Shang-NFT-Wallet/blob/master/packages/react-app/src/App.jsx)
  ")) %>
 <hr>
 <center><h2>Parsers List</h2></center>
@@ -68,6 +68,16 @@
     <br>
 
     <button>Download Resources // TODO</button>
+    <br><br>
+    <b>Coupon ID: </b><input name="coupon" value="<%= assigns[:coupon]%>" type="text" style="width:50%">
+    <br><br>
+    <button type="button"
+        phx-click="upload_rules"
+        phx-value-parser_id="<%= parser.unique_id %>"
+        phx-value-coupon="<%= assigns[:coupon]%>">
+        Upload Parser Rule to Arweave // TODO
+    </button>
     <hr>
 <% end %>
 </div>
+<% end %>

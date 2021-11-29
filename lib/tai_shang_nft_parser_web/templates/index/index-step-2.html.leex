@@ -7,31 +7,35 @@
   </center>
 <%= f = form_for @form, "#", [phx_submit: :step_2_submit] , fn f ->%>
 <br>
-    <div class = "card-outframe">
+
     <%# <form phx-change="step_2_change"> %>
-        <%= for resource <- @resources do%>
-        <div class="card">
-            <div class="component">
-            <img
-                src="<%= Routes.static_path(@socket, "/images/"<>resource.img_source) %>" class="card-img-top" alt="...">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><%= resource.name %></h5>
-                <h5 class="card-title"><%= resource.description %></h5>
-                <h5 class="card-title"><%= resource.unique_id %></h5>
-                <h5 class="card-title"><b>tx id on arweave:</b>
-                    <br>
-                    <%= resource.arweave_tx_id %>
-                </h5>
-                <!--The Color you want:<input type="text" class="color-setter"/>-->
-                <br>
-                <button type="button"  phx-value-resource_id="<%= resource.id %>" phx-click="add_to_my_collection" class="btn btn-success">
-                    Add it to My Cart!
-                </button>
-            </div>
+        <%= for  resources_group <- Enum.chunk_every(@resources, 5) do%>
+        <div class = "card-outframe">
+            <%= for resource <- resources_group do%>
+                <div class="card">
+                    <div class="component">
+                    <img
+                        src="<%= Routes.static_path(@socket, "/images/"<>resource.img_source) %>" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= resource.name %></h5>
+                        <h5 class="card-title"><%= resource.description %></h5>
+                        <h5 class="card-title"><%= resource.unique_id %></h5>
+                        <h5 class="card-title"><b>tx id on arweave:</b>
+                            <br>
+                            <%= resource.arweave_tx_id %>
+                        </h5>
+                        <!--The Color you want:<input type="text" class="color-setter"/>-->
+                        <br>
+                        <button type="button"  phx-value-resource_id="<%= resource.id %>" phx-click="add_to_my_collection" class="btn btn-success">
+                            Add it to My Cart!
+                        </button>
+                    </div>
+                </div>
+            <% end %>
         </div>
         <% end %>
-</div>
+
 <br><br>
 <center>
 

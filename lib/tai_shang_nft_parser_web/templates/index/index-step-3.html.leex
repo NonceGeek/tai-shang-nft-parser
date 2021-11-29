@@ -8,7 +8,7 @@
          <img
             src="<%= Routes.static_path(@socket, "/images/"<> @resource_selected.img_source) %>" class="card-img-top" style="width: 100px" alt="...">
         <br>
-        <%= for resource <-  @resources do %>
+        <%= for resource <-  @resources_in_cart do %>
             <button type="button" class="btn btn-primary" phx-value-resource_id="<%= resource.id %>" phx-click="change_selected_component">
                     <%= resource.name%>
             </button>
@@ -95,6 +95,7 @@
             </center>
           </div>
       </div>
+      <br>
       <div>
         <center>
           <b>Give parser a Name: </b>
