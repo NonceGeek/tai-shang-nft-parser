@@ -1,0 +1,73 @@
+<br><br>
+
+<div style="width:70%;margin:auto;">
+<center><h2>API Document</h2></center>
+ <%= raw(Earmark.as_html!("
+
+**path:** Render-API in Parser
+
+**method:** `POST`
+
+**body-type:** `application/json`
+
+**body-example:**
+
+```
+{
+    \"token_uri\"\:\"data:application/json;base64,eyJuYW1lIjogIk4gIzIzMyIsICJkZXNjcmlwdGlvbiI6ICJOIGlzIGp1c3QgbnVtYmVycy4iLCAiaW1hZ2UiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhCeVpYTmxjblpsUVhOd1pXTjBVbUYwYVc4OUluaE5hVzVaVFdsdUlHMWxaWFFpSUhacFpYZENiM2c5SWpBZ01DQXpOVEFnTXpVd0lqNDhjM1I1YkdVK0xtSmhjMlVnZXlCbWFXeHNPaUIzYUdsMFpUc2dabTl1ZEMxbVlXMXBiSGs2SUhObGNtbG1PeUJtYjI1MExYTnBlbVU2SURFMGNIZzdJSDA4TDNOMGVXeGxQanh5WldOMElIZHBaSFJvUFNJeE1EQWxJaUJvWldsbmFIUTlJakV3TUNVaUlHWnBiR3c5SW1Kc1lXTnJJaUF2UGp4MFpYaDBJSGc5SWpFd0lpQjVQU0l5TUNJZ1kyeGhjM005SW1KaGMyVWlQakV3UEM5MFpYaDBQangwWlhoMElIZzlJakV3SWlCNVBTSTBNQ0lnWTJ4aGMzTTlJbUpoYzJVaVBqazhMM1JsZUhRK1BIUmxlSFFnZUQwaU1UQWlJSGs5SWpZd0lpQmpiR0Z6Y3owaVltRnpaU0krTlR3dmRHVjRkRDQ4ZEdWNGRDQjRQU0l4TUNJZ2VUMGlPREFpSUdOc1lYTnpQU0ppWVhObElqNDJQQzkwWlhoMFBqeDBaWGgwSUhnOUlqRXdJaUI1UFNJeE1EQWlJR05zWVhOelBTSmlZWE5sSWo0MFBDOTBaWGgwUGp4MFpYaDBJSGc5SWpFd0lpQjVQU0l4TWpBaUlHTnNZWE56UFNKaVlYTmxJajR4TVR3dmRHVjRkRDQ4ZEdWNGRDQjRQU0l4TUNJZ2VUMGlNVFF3SWlCamJHRnpjejBpWW1GelpTSStNand2ZEdWNGRENDhkR1Y0ZENCNFBTSXhNQ0lnZVQwaU1UWXdJaUJqYkdGemN6MGlZbUZ6WlNJK01UQThMM1JsZUhRK1BDOXpkbWMrIn0=\",
+    \"base_url\":\"https://bewater.leeduckgo.com\"
+}
+```
+
+**response-example:**
+
+```
+{
+    \"error_code\": 0,
+    \"error_msg\": \"success\",
+    \"result\": {
+        \"description\": \"N is just numbers.\",
+        \"image\": \"data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pbllNaW4gbWVldCIgdmlld0JveD0iMCAwIDM1MCAzNTAiPjxzdHlsZT4uYmFzZSB7IGZpbGw6IHdoaXRlOyBmb250LWZhbWlseTogc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgfTwvc3R5bGU+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iYmxhY2siIC8+PGltYWdlIHhsaW5rOmhyZWY9J2h0dHBzOi8vYmV3YXRlci5sZWVkdWNrZ28uY29tL3N2Z19yZXNvdXJjZXMvYmV3YXRlcl9mbG93aW5nLmdpZicgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PGltYWdlIHhsaW5rOmhyZWY9JycgeD0nMCcgeT0nMCcgaGVpZ2h0PSczODUnIHdpZHRoPSczODAnIC8+PHRleHQgeD0iMTAiIHk9IjIwIiBjbGFzcz0iYmFzZSI+MTA8L3RleHQ+PHRleHQgeD0iMTAiIHk9IjQwIiBjbGFzcz0iYmFzZSI+OTwvdGV4dD48dGV4dCB4PSIxMCIgeT0iNjAiIGNsYXNzPSJiYXNlIj41PC90ZXh0Pjx0ZXh0IHg9IjEwIiB5PSI4MCIgY2xhc3M9ImJhc2UiPjY8L3RleHQ+PHRleHQgeD0iMTAiIHk9IjEwMCIgY2xhc3M9ImJhc2UiPjQ8L3RleHQ+PHRleHQgeD0iMTAiIHk9IjEyMCIgY2xhc3M9ImJhc2UiPjExPC90ZXh0Pjx0ZXh0IHg9IjEwIiB5PSIxNDAiIGNsYXNzPSJiYXNlIj4yPC90ZXh0Pjx0ZXh0IHg9IjEwIiB5PSIxNjAiIGNsYXNzPSJiYXNlIj4xMDwvdGV4dD48L3N2Zz4=\",
+        \"name\": \"N #233\"
+    }
+}
+```
+
+**see code example in dApp:**
+ >abcdefg
+ ")) %>
+<hr>
+<center><h2>Parsers List</h2></center>
+<%= for parser <- @parsers do %>
+    <b>Parser Name: </b><%= parser.name %>
+    <br>
+    <b>Parser ID: </b><%= parser.unique_id %>
+    <br>
+    <b>The NFT Type of the Parser: </b><%= parser.contract_types.name %>
+    <br>
+    <b>The Render API(resources on server):</b><br>
+    <%= raw(Earmark.as_html!("``` #{parser.url} ```")) %>
+
+    <b>The Render API(resources on arweave):</b><br>
+    <%= raw(Earmark.as_html!("``` #{parser.url_ar} ```")) %>
+
+    <b>The Way to Render:</b>
+
+    <br>
+       <%= for {key, value} <- parser.resources do %>
+            <li>
+                <b><%= key %></b>: [
+                <%= for item <- value.collection do %>
+                    <a href="<%=Routes.single_viewer_path(@socket, :index, %{resource_id: item})%>">
+                        <%= item %>,
+                    </a>
+                <% end %>
+                ]
+            </li>
+       <% end %>
+    <br>
+
+    <button>Download Resources // TODO</button>
+    <hr>
+<% end %>
+</div>

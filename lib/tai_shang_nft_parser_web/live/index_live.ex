@@ -4,7 +4,15 @@ defmodule TaiShangNftParserWeb.IndexLive do
   alias TaiShangNftParser.ImgResources
   alias TaiShangNftParser.ContractTypes
   alias TaiShangNftParser.Parsers
+  alias TaiShangNftParser.ParserTypes
   alias Utils.URIHandler
+
+  @inputs_listen_change [
+    "first", "second", "third",
+    "fourth", "fifth", "sixth",
+    "seventh", "eighth"
+  ]
+  @init_value "1"
 
   @page_first "1"
   @default_page_size "3"
@@ -40,7 +48,16 @@ defmodule TaiShangNftParserWeb.IndexLive do
       |> assign(resources: resources)
       |> assign(resource_selected: resource_selected)
       |> assign(contract_type_name: contract_type_name)
+      |> assign(payloads: init_payloads())
     }
+  end
+
+  def init_payloads() do
+    @inputs_listen_change
+    |> Enum.map(&String.to_atom(&1))
+    |> Enum.reduce(%{}, fn key, acc ->
+      Map.put(acc, key, @init_value)
+    end)
   end
 
   def mount(
@@ -62,6 +79,7 @@ defmodule TaiShangNftParserWeb.IndexLive do
     }
   end
 
+  @impl true
   def handle_params(params, _url, socket) do
     {page, ""} = Integer.parse(params["page"] || @page_first)
     {per_page, ""} = Integer.parse(params["per_page"] || @default_page_size)
@@ -187,11 +205,67 @@ defmodule TaiShangNftParserWeb.IndexLive do
   end
 
   @impl true
+  def handle_event(key, _value, socket)
+    when key in ["determine_rule", "submit_rule"] do
+    {
+      :noreply,
+      socket
+      |> assign(clicked: key)
+    }
+  end
+
+  @impl true
   def handle_event("step_3_submit", %{"payloads" => payloads}, socket) do
+    do_handle_event(payloads, socket, socket.assigns.clicked)
+  end
+
+  def do_handle_event(payloads, socket, "determine_rule") do
+    generate_img_by_payloads(payloads, socket)
+  end
+
+  def do_handle_event(
+    %{"parser_name" => parser_name},
+    socket,
+    "submit_rule") do
+      collection = socket.assigns[:collection]
+    if is_nil(collection) do
+      # TODO
+      {:noreply, socket}
+    else
+      contract_type_name = socket.assigns.contract_type_name
+      {:ok, %{id: id}} =
+        ParserTypes.generate(parser_name, collection, contract_type_name)
+      {:noreply,
+        push_redirect(
+        socket,
+        to: Routes.parser_types_path(
+          socket,
+          :index,
+          %{parser_id: id})
+      )}
+    end
+
+  end
+
+  def handle_event("step_3_change",
+  %{
+    "_target" => ["payloads", input_name],
+    "payloads" => payloads
+  }, socket)
+  when input_name in @inputs_listen_change
+  do
+    case Integer.parse(payloads[input_name]) do
+      :error ->
+        {:noreply, socket}
+      _else ->
+        generate_img_by_payloads(payloads, socket)
+    end
+  end
+
+  def generate_img_by_payloads(payloads, socket) do
+    payloads_atom = ExStructTranslator.to_atom_struct(payloads)
     {payloads_with_line, payloads_with_out_line} =
-      payloads
-      |> ExStructTranslator.to_atom_struct()
-      |> split_payloads()
+      split_payloads(payloads_atom)
     collection = generate_collection(payloads_with_line)
     {image, image_parsed} =
       Parsers.parse_handle_rebuild_nft_for_preview(
@@ -204,10 +278,19 @@ defmodule TaiShangNftParserWeb.IndexLive do
       socket
       |> assign(image_parsed: image_parsed)
       |> assign(image: image)
-      |> assign(payloads: payloads_with_line)
+      |> assign(payloads: payloads_atom)
+      |> assign(collection: collection)
     }
   end
 
+
+  def handle_event("step_3_change", _else, socket) do
+    {:noreply, socket}
+  end
+
+  @doc """
+    split_payloads(atom_map())
+  """
   def split_payloads(payloads) do
     payloads_with_out_line =
       payloads
@@ -219,6 +302,9 @@ defmodule TaiShangNftParserWeb.IndexLive do
       payloads
       |> Enum.filter(fn {key, value} ->
         line_in_key?(key)
+      end)
+      |> Enum.reject(fn {key, value} ->
+        key == :parser_name
       end)
       |> Enum.into(%{})
 

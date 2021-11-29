@@ -37,7 +37,7 @@ defmodule TaiShangNftParserWeb.Router do
     pipe_through [:browser]
     live "/", IndexLive, :index
     live "/live/contracts", ContractsLive, :index
-    live "/live/parser_rules", ParserRulesLive, :index
+    live "/live/parsers", ParserTypesLive, :index
     live "/live/resource_viewer/single_viewer", ResourceViewer.SingleViewerLive, :index
   end
 

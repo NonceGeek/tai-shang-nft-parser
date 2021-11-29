@@ -56,6 +56,7 @@ defmodule TaiShangNftParser.NftHandler.NHandler do
 
   @spec do_handle_svg(String.t(), map(), String.t()) :: binary
   def do_handle_svg(img_parsed, resources, base_url) do
+
     abstract_nft =
       img_parsed
       |> parser_svg()
@@ -67,7 +68,7 @@ defmodule TaiShangNftParser.NftHandler.NHandler do
         value = Map.get(abstract_nft, key)
         img_source =
           collection
-          |> Enum.at(value)
+          |> Enum.at(value - 1)
           |> NftHandler.handle_img_resource(base_url)
 
 
@@ -87,7 +88,7 @@ defmodule TaiShangNftParser.NftHandler.NHandler do
   end
 
   def insert_background(abstract_nft, %{background: _background}) do
-    Map.put(abstract_nft, :background, 0)
+    Map.put(abstract_nft, :background, 1)
   end
 
   def parser_svg(img_parsed) do

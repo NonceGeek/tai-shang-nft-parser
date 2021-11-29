@@ -68,6 +68,9 @@ defmodule TaiShangNftParser.MixProject do
 
       # handle_uri
       {:ex_url, "~> 1.4"},
+
+      # markdown
+      {:earmark, "~> 1.4"},
     ]
   end
 

@@ -79,10 +79,25 @@ Enum.each(svg_resources, fn svg ->
   ImgResources.create(svg)
 end)
 
+# ========
+
+example_svg =
+  Utils.FileHandler.read(:bin, "example_nft.uri")
+{:ok, %{id: id}} = ContractTypes.create(
+  %{
+    name: "n",
+    description: "the n project",
+    handler: "NHandler",
+    example_svg: example_svg
+  }
+)
+
+# ========
 parser_type =
   %{
-    name: "satofish",
-    unique_id: 1,
+    contract_types_id: id,
+    name: "bewater",
+    unique_id: "78a8600956af0b56cd53b1ea68e9a3f32623e47d5d",
     resources:
       %{
         background: %{collection: [10001], x: 0, y: 0, height: 385, width: 380},
@@ -98,16 +113,8 @@ parser_type =
   }
 
 ParserTypes.create(parser_type)
-example_svg =
-  Utils.FileHandler.read(:bin, "example_nft.uri")
-{:ok, %{id: id}} = ContractTypes.create(
-  %{
-    name: "n",
-    description: "the n project",
-    handler: "NHandler",
-    example_svg: example_svg
-  }
-)
+
+# ========
 
 Contracts.create(
   %{
@@ -125,21 +132,7 @@ Contracts.create(
     code_url: "https://github.com/WeLightProject/tai-shang-nft-contracts/tree/feat/whitelist_n"
   })
 
-ParserRules.create(
-  %{
-    unique_id: 1,
-    description: "bewater",
-    object_to_resource:
-    %{
-      background: [10001],
-      first: [20001,20001,20001,20001,20002,20002,20002,20002,20003,20003,20003,0],
-      second: [30001,30001,30001,30001,30002,30002,30002,30002,30003,30003,30003, 0],
-      third: [50001,50001,50001,50001,50002,50002,50002,50002,50003,50003,50003, 0],
-      fourth: [40001,40001,40001,40001,40001,40001,40001,40001,40001,40001,40001, 40001]
-
-    },
-    contract_types_id: id,
-  })
+# ========
 
 # !important: for Test!Ano it when using in production env
 User.create("leeduckgo@l.com", "1234567890", "admin")

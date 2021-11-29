@@ -1,4 +1,5 @@
-<%= f = form_for @form, "#", [phx_submit: :step_3_submit] , fn f ->%>
+<div style="width:70%;margin:auto;">
+<%= f = form_for @form, "#", [phx_change: :step_3_change, phx_submit: :step_3_submit] , fn f ->%>
 <br>
   <center>
     <h3>Step 0x03: Setting Rules! and Preview!<h3>
@@ -8,7 +9,7 @@
             src="<%= Routes.static_path(@socket, "/images/"<> @resource_selected.img_source) %>" class="card-img-top" style="width: 100px" alt="...">
         <br>
         <%= for resource <-  @resources do %>
-            <button type="button"  phx-value-resource_id="<%= resource.id %>" phx-click="change_selected_component">
+            <button type="button" class="btn btn-primary" phx-value-resource_id="<%= resource.id %>" phx-click="change_selected_component">
                     <%= resource.name%>
             </button>
 
@@ -21,77 +22,90 @@
     ["fish","fish","fish","fish","fish","fish","fish","fish","fish","fish","fish","fish","fish","fish"]
   </center>
     <b> background(just the name of component): </b>
-    <%= text_input f, :background_collection, value: assigns[:payloads]["background_collection"] %>
+    <%= text_input f, :background_collection, value: assigns[:payloads][:background_collection] %>
     <br>
     <b> first: </b>
-    <%= text_input f, :first_collection, value: assigns[:payloads]["first_collection"] %>
+    <%= text_input f, :first_collection, value: assigns[:payloads][:first_collection] %>
     <br>
     <b> second: </b>
-    <%= text_input f, :second_collection, value: assigns[:payloads]["second_collection"] %>
+    <%= text_input f, :second_collection, value: assigns[:payloads][:second_collection] %>
     <br>
     <b> third: </b>
-    <%= text_input f, :third_collection, value: assigns[:payloads]["third_collection"] %>
+    <%= text_input f, :third_collection, value: assigns[:payloads][:third_collection] %>
     <br>
     <b> fourth: </b>
-    <%= text_input f, :fourth_collection, value: assigns[:payloads]["fourth_collection"] %>
+    <%= text_input f, :fourth_collection, value: assigns[:payloads][:fourth_collection] %>
     <br>
     <b> fifth: </b>
-    <%= text_input f, :fifth_collection, value: assigns[:payloads]["fifth_collection"] %>
+    <%= text_input f, :fifth_collection, value: assigns[:payloads][:fifth_collection] %>
     <br>
     <b> sixth: </b>
-    <%= text_input f, :sixth_collection, value: assigns[:payloads]["sixth_collection"] %>
+    <%= text_input f, :sixth_collection, value: assigns[:payloads][:sixth_collection] %>
     <br>
     <b> seventh: </b>
-    <%= text_input f, :seventh_collection, value: assigns[:payloads]["seventh_collection"] %>
+    <%= text_input f, :seventh_collection, value: assigns[:payloads][:seventh_collection] %>
     <br>
     <b> eighth: </b>
-    <%= text_input f, :eighth_collection, value: assigns[:payloads]["eighth_collection"] %>
-    <br>
-    <button type="submit">determine the rule</button>
+    <%= text_input f, :eighth_collection, value: assigns[:payloads][:eighth_collection] %>
+    <br><br>
+    <center>
+      <button type="submit" phx-click="determine_rule">0x03-1 determine the rule</button>
+    </center>
     <br>
     <center><h1>- Preview -</h1>
     Input the params of nfts for preview:
     </center>
-    <div>
-      <div style="width:30%;float:left;padding-right: 20px">
-      <b> first: </b>
-      <%= text_input f, :first, value: "1" %>
-      <br>
-      <b> second: </b>
-      <%= text_input f, :second, value: "1" %>
-      <br>
-      <b> third: </b>
-      <%= text_input f, :third, value: "1" %>
-      <br>
-      <b> fourth: </b>
-      <%= text_input f, :fourth, value: "1" %>
-      <br>
-      <b> fifth: </b>
-      <%= text_input f, :fifth, value: "1" %>
-      <br>
-      <b> sixth: </b>
-      <%= text_input f, :sixth, value: "1" %>
-      <br>
-      <b> seventh: </b>
-      <%= text_input f, :seventh, value: "1" %>
-      <br>
-      <b> eighth: </b>
-      <%= text_input f, :eighth, value: "1" %>
+    <div style="display: flex;flex-direction: column;">
+      <div>
+        <div style="width:30%;float:left;padding-right: 20px">
+        <b> first: </b>
+        <%= text_input f, :first, value: assigns[:payloads][:first] %>
+        <br>
+        <b> second: </b>
+        <%= text_input f, :second, value: assigns[:payloads][:second] %>
+        <br>
+        <b> third: </b>
+        <%= text_input f, :third, value: assigns[:payloads][:third] %>
+        <br>
+        <b> fourth: </b>
+        <%= text_input f, :fourth, value: assigns[:payloads][:fourth] %>
+        <br>
+        <b> fifth: </b>
+        <%= text_input f, :fifth, value: assigns[:payloads][:fifth]  %>
+        <br>
+        <b> sixth: </b>
+        <%= text_input f, :sixth, value: assigns[:payloads][:sixth]  %>
+        <br>
+        <b> seventh: </b>
+        <%= text_input f, :seventh, value: assigns[:payloads][:seventh] %>
+        <br>
+        <b> eighth: </b>
+        <%= text_input f, :eighth, value: assigns[:payloads][:eighth] %>
+        </div>
+          <div>
+            <center>
+            <div style="width:300px">
+              <%= raw(assigns[:image]) %>
+            </div>
+
+                ↓↓↓
+            <div style="width:300px">
+              <%= raw(assigns[:image_parsed]) %>
+            </div>
+            </center>
+          </div>
       </div>
       <div>
         <center>
-        <div style="width:400px">
-          <%= raw(assigns[:image]) %>
-        </div>
-            ↓↓↓
-        <div style="width:300px">
-          <%= raw(assigns[:image_parsed]) %>
-        </div>
+          <b>Give parser a Name: </b>
+          <input type="text" id="payloads_parser_name" name="payloads[parser_name]" style="width: 200px">
+
+          <br><br>
+          <button type="submit" phx-click="submit_rule">0x03-2 submit the rule</button>
         </center>
-      <div>
-    <div>
-
-
+      </div>
+    </div>
 
 
 <% end %>
+</div>

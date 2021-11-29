@@ -4,7 +4,7 @@ defmodule TaiShangNftParser.Repo.Migrations.CreateParserTypes do
   def change do
     create table :parser_types do
       add :name, :string
-      add :unique_id, :integer
+      add :unique_id, :string
       add :resources, :map
       timestamps()
     end
