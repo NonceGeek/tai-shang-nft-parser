@@ -110,11 +110,11 @@ parser_type =
     unique_id: "78a8600956af0b56cd53b1ea68e9a3f32623e47d5d",
     resources:
       %{
-        background: %{collection: [10001], x: 0, y: 0, height: 385, width: 380},
-        first: %{collection: [20001,20001,20001,20001,20002,20002,20002,20002,20003,20003,20003,0], x: 229, y: 75 , height: 100, width: 100}, # hat
-        second: %{collection: [30001,30001,30001,30001,30002,30002,30002,30002,30003,30003,30003, 0], x: 160, y: 260, height: 100, width: 100}, # shoes
-        third: %{collection: [50001,50001,50001,50001,50002,50002,50002,50002,50003,50003,50003, 0], x: 200, y: 150, height: 100, width: 100}, # hand
-        fourth: %{collection: [40001,40001,40001,40001,40001,40001,40001,40001,40001,40001,40001, 40001], x: 130, y: 0, height: 100, width: 150}, #slogan
+        background: %{collection: [], x: 0, y: 0, height: 350, width: 350},
+        first: %{collection: [ 10001, 10001, 10001, 10001, 10002, 10002, 10002, 10003, 10003, 10004, 10004, 10004, 10004, 10004], x: 0, y: 0 , height: 350, width: 350}, # hat
+        second: %{collection: [20001,20001,20001,20001,20002,20002,20002,20002,20003,20003,20003, 0], x: 0, y: 0 , height: 350, width: 350}, # shoes
+        third: %{collection: [30001,30001,30001,30001,30002,30002,30002,30002,30003,30003,30003, 0, 0], x: 0, y: 0 , height: 350, width: 350}, # hand
+        fourth: %{collection: [40001,40001,40001,40002,40002,40002,40002,40003,40003,40003,40003, 40003, 0, 0], x: 0, y: 0 , height: 350, width: 350}, #slogan
         fifth: %{collection: [], x: 5, y: 5, height: 100, width: 100},
         sixth: %{collection: [], x: 5, y: 5, height: 100, width: 100},
         seventh: %{collection: [], x: 5, y: 5, height: 100, width: 100},
