@@ -14,15 +14,31 @@ defmodule TaiShangNftParserWeb.AsciiGalleryLive do
     }
   end
 
-  def handle_contracts(contracts) do
-    contracts
+  @impl true
+  def handle_event("generate_page", %{
+    "unique_id" => unique_id
+  }, socket) do
+
+    {
+      :noreply,
+      socket
+      |> push_redirect(
+        to: Routes.ascii_viewer_path(
+          socket,
+          :index,
+          %{unique_id: unique_id})
+      )
+    }
   end
 
   @impl true
-  def handle_event(_,_, socket) do
-    {:noreply, socket}
-  end
+  def handle_event(_, _, socket) do
 
+    {
+      :noreply,
+      socket
+    }
+  end
   @impl true
   def handle_params(params, _url, socket) do
     {page, ""} = Integer.parse(params["page"] || @page_first)

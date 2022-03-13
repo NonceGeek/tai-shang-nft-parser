@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <style>
+      code {
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="card">
+    </div>
+    <button onclick="flip()">flip</button>
+    <script>
+      var i = 0;
+      function flip() {
+        if (i == 0) {
+          document.getElementById("card").innerHTML = `
+<b>「<%= @resource.name %>」</b><br>
+<code>
+<%= @resource.uri %>
+</code>
+      `;
+          i = 1;
+        } else {
+          document.getElementById("card").innerHTML = `
+<b><%= @resource.name %></b><br>
+<b><%= @resource.description %></b>
+      `;
+          i = 0;
+        }
+      }
+    flip();
+    </script>
+  </body>
+</html>

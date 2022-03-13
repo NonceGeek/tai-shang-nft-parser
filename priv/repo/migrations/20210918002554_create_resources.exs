@@ -5,7 +5,7 @@ defmodule TaiShangNftParser.Repo.Migrations.CreateResources do
     create table :resources do
       add :name, :string
       add :unique_id, :integer
-      add :description, :string
+      add :description, :text
       add :source, :string
       add :uri, :text
       add :type, :string, default: "img"

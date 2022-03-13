@@ -1,7 +1,5 @@
 
 <br>
-
-    <%# <form phx-change="step_2_change"> %>
         <%= for  resources_group <- Enum.chunk_every(@resources, 5) do%>
         <div class = "card-outframe">
             <%= for resource <- resources_group do%>
@@ -20,6 +18,13 @@
 [#{resource.arweave_tx_id}](#{Utils.ArweaveNode.get_node}/#{resource.arweave_tx_id})
                         "
                         ))%>
+                    <button
+                        type="button"
+                        phx-click="generate_page"
+                        phx-value-unique_id="<%= resource.unique_id %>"
+                        class="btn btn-info btn-lg">
+                        Generate Page
+                    </button>
                     </div>
                 </div>
             <% end %>

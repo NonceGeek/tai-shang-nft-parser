@@ -27,6 +27,11 @@ defmodule TaiShangNftParserWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :no_layout do
+    # plug :put_layout, false
+    plug :put_root_layout, false
+  end
+
   scope "/" do
     pipe_through :browser
 
@@ -35,11 +40,22 @@ defmodule TaiShangNftParserWeb.Router do
 
   scope "/", TaiShangNftParserWeb do
     pipe_through [:browser]
+    # liveview
     live "/", IndexLive, :index
     live "/live/contracts", ContractsLive, :index
     live "/live/parsers", ParserTypesLive, :index
     live "/live/resource_viewer/single_viewer", ResourceViewer.SingleViewerLive, :index
+    live "/live/resource_viewer/ascii_viewer", ResourceViewer.AsciiViewerLive, :index
     live "/live/ascii_gallery", AsciiGalleryLive, :index
+
+    # # classic
+
+    # get "/ascii_page", AsciiPageController, :index
+  end
+
+  scope "/simple/", TaiShangNftParserWeb do
+    pipe_through [:no_layout]
+    get "/ascii_page", AsciiPageController, :index
   end
 
   scope "/logined", TaiShangNftParserWeb do

@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <style>
+      code {
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="card">
+    </div>
+    <button onclick="flip()">flip</button>
+    <script>
+      var i = 0;
+      function flip() {
+        if (i == 0) {
+          document.getElementById("card").innerHTML = `
+<b>「frog」</b><br>
+<code>
+        _  _
+       (.)(.)
+   ,-.(.____.),-.
+  ( \\ \\ '--' / / )
+   \\ \\ / ,. \\ / /
+    ) '| || |' ( mrf
+OoO'- OoO''OoO -'OoO
+</code>      
+      `;
+          i = 1;
+        } else {
+          document.getElementById("card").innerHTML = `
+<b>「frog」</b><br>
+<b>it's just a little frog</b>
+      `;
+          i = 0;
+        }
+      }
+    flip();
+    </script>
+  </body>
+</html>

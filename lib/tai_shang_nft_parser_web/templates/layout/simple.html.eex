@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <style>
+      code {
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <%= @inner_content %>
+  </body>
+</html>
