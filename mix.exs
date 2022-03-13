@@ -63,14 +63,18 @@ defmodule TaiShangNftParser.MixProject do
       # {:bcrypt_elixir, "~> 1.0"},
       {:pow, "~> 1.0.25"},
 
+
       # arweave
-      {:arweave_sdk_ex, "~> 0.1.1"},
+      {:arweave_sdk_ex, "~> 0.1.9"},
 
       # handle_uri
       {:ex_url, "~> 1.4"},
 
       # markdown
       {:earmark, "~> 1.4"},
+
+      # http
+      {:httpoison, "~> 1.5"},
     ]
   end
 

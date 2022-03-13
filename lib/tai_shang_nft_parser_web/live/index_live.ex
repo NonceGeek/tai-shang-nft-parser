@@ -1,12 +1,13 @@
 defmodule TaiShangNftParserWeb.IndexLive do
   use TaiShangNftParserWeb, :live_view
   alias TaiShangNftParserWeb.IndexView
-  alias TaiShangNftParser.ImgResources
+  alias TaiShangNftParser.Resources
   alias TaiShangNftParser.ContractTypes
   alias TaiShangNftParser.Parsers
   alias TaiShangNftParser.ParserTypes
   alias Utils.URIHandler
 
+  @img_type "img"
   @inputs_listen_change [
     "first", "second", "third",
     "fourth", "fifth", "sixth",
@@ -64,7 +65,7 @@ defmodule TaiShangNftParserWeb.IndexLive do
       |> Poison.decode!()
     resources_in_cart =
       Enum.map(cart_ids, fn img_id ->
-        ImgResources.get_by_id(img_id)
+        Resources.get_by_id(img_id)
       end)
     resource_selected =
       Enum.fetch!(resources_in_cart, 0)
@@ -130,11 +131,11 @@ defmodule TaiShangNftParserWeb.IndexLive do
 
   defp fetch(page, per_page) do
     resources =
-      page
-      |> ImgResources.list(per_page)
+      @img_type
+      |> Resources.list(page, per_page)
     %{
       resources: resources,
-      page_title: "Listing ImgResources – Page #{page}"
+      page_title: "Listing Resources – Page #{page}"
     }
   end
 
@@ -217,8 +218,8 @@ defmodule TaiShangNftParserWeb.IndexLive do
   def handle_event("add_to_my_collection", %{"resource_id" => resource_id}, socket) do
     resource_id_int = String.to_integer(resource_id)
     carts_new = socket.assigns.carts ++ [resource_id_int]
-    img_source = ImgResources.get_by_id(resource_id_int)
-    cart_names_new = socket.assigns.cart_names ++ [img_source.name]
+    source = Resources.get_by_id(resource_id_int)
+    cart_names_new = socket.assigns.cart_names ++ [source.name]
     {
       :noreply,
       socket
@@ -232,7 +233,7 @@ defmodule TaiShangNftParserWeb.IndexLive do
     resource_new =
       resource_id
       |> String.to_integer()
-      |> ImgResources.get_by_id()
+      |> Resources.get_by_id()
     {
       :noreply,
       socket
@@ -376,7 +377,7 @@ defmodule TaiShangNftParserWeb.IndexLive do
     resource =
       name
       |> String.replace("\"", "")
-      |> ImgResources.get_by_name()
+      |> Resources.get_by_name()
     {
       :background,
       %{collection: [resource.unique_id], height: 385, width: 380, x: 0, y: 0}
@@ -393,7 +394,7 @@ defmodule TaiShangNftParserWeb.IndexLive do
       resources_name_list_str
       |> handle_list()
       |> Enum.map(fn resources_name ->
-        resource = ImgResources.get_by_name(resources_name)
+        resource = Resources.get_by_name(resources_name)
         resource.unique_id
       end)
     {

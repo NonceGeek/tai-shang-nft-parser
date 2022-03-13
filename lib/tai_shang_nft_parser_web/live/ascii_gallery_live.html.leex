@@ -1,0 +1,40 @@
+
+<br>
+
+    <%# <form phx-change="step_2_change"> %>
+        <%= for  resources_group <- Enum.chunk_every(@resources, 5) do%>
+        <div class = "card-outframe">
+            <%= for resource <- resources_group do%>
+                <div class="card">
+                    <%= raw(Earmark.as_html!(
+                        "```\n#{resource.uri}\n```"
+                        ))%>
+                    <div class="card-body">
+                        <%= raw(Earmark.as_html!(
+                        "
+- **name:** #{resource.name}
+- **description:** #{resource.description}
+- **unique id:** #{resource.unique_id}
+- **tx id on arweave:**
+
+[#{resource.arweave_tx_id}](#{Utils.ArweaveNode.get_node}/#{resource.arweave_tx_id})
+                        "
+                        ))%>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <% end %>
+
+<br><br>
+<center>
+
+    <%= if @page > 1 do %>
+        <span><%= live_patch "prev", to: Routes.ascii_gallery_path(@socket, :index, %{page: @page - 1}) %></span>
+    <% end %>
+    <%= for i <- (@page - 5)..(@page + 5), i > 0 do %>
+        <span><%= live_patch "#{i}", to: Routes.ascii_gallery_path(@socket, :index, %{page: i}) %></span>
+    <% end %>
+    <span><%= live_patch "next", to: Routes.ascii_gallery_path(@socket, :index, %{page: @page + 1}) %></span>
+
+</center>

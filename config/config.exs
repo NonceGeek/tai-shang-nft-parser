@@ -8,7 +8,11 @@
 use Mix.Config
 
 config :tai_shang_nft_parser,
-  ecto_repos: [TaiShangNftParser.Repo]
+  ecto_repos: [TaiShangNftParser.Repo],
+  arweave: "https://arweave.net",
+  url_actually: "https://taishang.leeduckgo.com",
+  arweave_explorer: "https://viewblock.io/arweave/tx",
+  bundlr_explorer: "https://node1.bundlr.network/tx"
 
 # for user
 config :tai_shang_nft_parser, :pow,
@@ -23,9 +27,8 @@ config :tai_shang_nft_parser, TaiShangNftParserWeb.Endpoint,
   secret_key_base: "gEK+FDQ1h9Xz3N0azzPcWbSVM90ztwzKTL/1zemY/0XfxgwymPdasKOR9QpT/NMA",
   render_errors: [view: TaiShangNftParserWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TaiShangNftParser.PubSub,
-  live_view: [signing_salt: "w6b58jwy"],
-  arweave: "https://arweave.net",
-  url_actually: "https://taishang.leeduckgo.com"
+  live_view: [signing_salt: "w6b58jwy"]
+
 
 
 # Configures Elixir's Logger

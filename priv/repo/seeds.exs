@@ -10,9 +10,10 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias TaiShangNftParser.{ImgResources, ParserTypes}
+alias TaiShangNftParser.{Resources, ParserTypes}
 alias TaiShangNftParser.Users.User
 alias TaiShangNftParser.{Contracts, ContractTypes, ParserRules}
+alias Utils.ArweaveNode
 
 # init svg_resources
 
@@ -22,71 +23,71 @@ svg_resources =
       name: "house_yellow",
       unique_id: 10001,
       description: "an little yellow house",
-      img_source: "svg_resources/house_yellow.svg"},
+      source: "svg_resources/house_yellow.svg"},
     %{
       name: "house_red",
       unique_id: 10002,
       description: "an little red house",
-      img_source: "svg_resources/house_red.svg"},
+      source: "svg_resources/house_red.svg"},
     %{
       name: "house_black",
       unique_id: 10003,
       description: "an little black house",
-      img_source: "svg_resources/house_black.svg"},
+      source: "svg_resources/house_black.svg"},
     %{
       name: "house_green",
       unique_id: 10004,
       description: "an little green house",
-      img_source: "svg_resources/house_green.svg"},
+      source: "svg_resources/house_green.svg"},
     %{
       name: "ground_soil",
       unique_id: 20001,
       description: "soil ground",
-      img_source: "svg_resources/ground_soil.svg"},
+      source: "svg_resources/ground_soil.svg"},
     %{
       name: "ground_sea",
       unique_id: 20002,
       description: "sea",
-      img_source: "svg_resources/ground_sea.svg"},
+      source: "svg_resources/ground_sea.svg"},
     %{
       name: "ground_grass",
       unique_id: 20003,
       description: "grass ground",
-      img_source: "svg_resources/ground_grass.svg"},
+      source: "svg_resources/ground_grass.svg"},
     %{
       name: "sky_moon",
       unique_id: 30001,
       description: "orange shoes",
-      img_source: "svg_resources/sky_moon.svg"},
+      source: "svg_resources/sky_moon.svg"},
     %{
       name: "sky_sun",
       unique_id: 30002,
       description: "blue shoes",
-      img_source: "svg_resources/sky_sun.svg"},
+      source: "svg_resources/sky_sun.svg"},
     %{
       name: "sky_cloud",
       unique_id: 30003,
       description: "pink shoes",
-      img_source: "svg_resources/sky_cloud.svg"},
+      source: "svg_resources/sky_cloud.svg"},
     %{
       name: "slogan_wow",
       unique_id: 40001,
       description: "wow",
-      img_source: "svg_resources/slogan_wow.svg"},
+      source: "svg_resources/slogan_wow.svg"},
     %{
       name: "slogan_amazing",
       unique_id: 40002,
       description: "amazing",
-      img_source: "svg_resources/slogan_amazing.svg"},
+      source: "svg_resources/slogan_amazing.svg"},
     %{
       name: "slogan_cool_guy",
       unique_id: 40003,
       description: "cool guy",
-      img_source: "svg_resources/slogan_cool_guy.svg"},
+      source: "svg_resources/slogan_cool_guy.svg"},
 ]
 
 Enum.each(svg_resources, fn svg ->
-  ImgResources.create(svg)
+  Resources.create(svg)
 end)
 
 # ========
@@ -142,6 +143,41 @@ Contracts.create(
     code_url: "https://github.com/WeLightProject/tai-shang-nft-contracts/tree/feat/whitelist_n"
   })
 
+
+# ========
+ascii_resources =
+  [
+    %{
+      name: "frog",
+      unique_id: 8880001,
+      description: "a cute ascii frog",
+      arweave_tx_id: "rUcSsdMaTIYR4sJQU7T-w2rGDRel8AHVvBFGEPx69tg"
+    },
+    %{
+      name: "moose",
+      unique_id: 8880002,
+      description: "just a moose",
+      arweave_tx_id: "_UlggaU07e0xplvIWimGQQZSOKCf-J9Ar0X6a7_ePBs"
+    },
+    %{
+      name: "sword",
+      unique_id: 8880003,
+      description: "a handsome sword",
+      arweave_tx_id: "sfbwASy6ZoggFMAcn9VsGs5YIn1tVC0CxDqDwb-RloY"
+    },
+  ]
+
+
+Enum.each(ascii_resources, fn %{arweave_tx_id: tx_id} = resources ->
+  {:ok, %{content: content}} =
+    ArweaveNode.get_node()
+    |> ArweaveSdkEx.get_content_in_tx(tx_id)
+
+  resources
+  |> Map.put(:uri, content)
+  |> Map.put(:type, "ascii")
+  |> Resources.create()
+end)
 # ========
 
 # !important: for Test!Ano it when using in production env

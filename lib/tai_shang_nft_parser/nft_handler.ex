@@ -1,6 +1,6 @@
 defmodule TaiShangNftParser.NftHandler do
   alias TaiShangNftParser.ContractTypes
-  alias TaiShangNftParser.ImgResources
+  alias TaiShangNftParser.Resources
   alias Utils.StringHandler
 
   @module_prefix "Elixir.TaiShangNftParser.NftHandler."
@@ -52,14 +52,14 @@ defmodule TaiShangNftParser.NftHandler do
   def handle_img_resource(unique_id, _base_url) when is_nil(unique_id) or (unique_id == 0), do: ""
 
   def handle_img_resource(unique_id, base_url) do
-    img_source =
+    source =
       unique_id
-      |> ImgResources.get_by_unique_id()
-      |> Map.get(:img_source)
+      |> Resources.get_by_unique_id()
+      |> Map.get(:source)
 
     base_url
     |> StringHandler.handle_url()
-    |> Kernel.<>(img_source)
+    |> Kernel.<>(source)
   end
 
   # +-----------+

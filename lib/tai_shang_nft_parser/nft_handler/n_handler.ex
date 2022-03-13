@@ -54,8 +54,8 @@ defmodule TaiShangNftParser.NftHandler.NHandler do
   end
 
   def build_img_payload(nil, _x, _y, _height, _width), do: nil
-  def build_img_payload(img_source, x, y, height, width) do
-    "<image xlink:href='#{img_source}' "
+  def build_img_payload(source, x, y, height, width) do
+    "<image xlink:href='#{source}' "
     |> Kernel.<>("x='#{x}' y='#{y}' ")
     |> Kernel.<>("height='#{height}' width='#{width}' />")
   end
@@ -72,13 +72,13 @@ defmodule TaiShangNftParser.NftHandler.NHandler do
         # exp. %{collection: [4], x: 1, y: 1, height: 500, width: 500}
         %{collection: collection, x: x, y: y, height: height, width: width} = payload
         value = Map.get(abstract_nft, key)
-        img_source =
+        source =
           collection
           |> Enum.at(value - 1)
           |> NftHandler.handle_img_resource(base_url)
 
 
-        svg_acc <> build_img_payload(img_source, x, y, height, width)
+        svg_acc <> build_img_payload(source, x, y, height, width)
       end)
 
     result =

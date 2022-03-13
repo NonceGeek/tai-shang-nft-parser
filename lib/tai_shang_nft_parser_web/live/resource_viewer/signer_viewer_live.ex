@@ -1,11 +1,11 @@
 defmodule TaiShangNftParserWeb.ResourceViewer.SingleViewerLive do
   use TaiShangNftParserWeb, :live_view
-  alias TaiShangNftParser.ImgResources
+  alias TaiShangNftParser.Resources
   @impl true
   def mount(%{"resource_id" => id}, _session, socket) do
     id_int = String.to_integer(id)
     img_resource =
-      ImgResources.get_by_unique_id(id_int)
+      Resources.get_by_unique_id(id_int)
 
     {
       :ok,
